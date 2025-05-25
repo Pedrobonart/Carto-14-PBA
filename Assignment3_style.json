@@ -1,0 +1,220 @@
+{
+  "version": 8,
+  "name": "Empty Style",
+  "metadata": {"maputnik:renderer": "mlgljs"},
+  "sources": {
+    "OpenFreeMap": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet"
+    }
+  },
+  "sprite": "",
+  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "bg",
+      "type": "background",
+      "paint": {"background-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "landuse_historic-center",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "park",
+      "filter": [
+        "any",
+        ["==", "name", "Centro Histórico Perímetro A"],
+        ["==", "name", "Centro Histórico Perímetro B"]
+      ],
+      "paint": {"fill-color": "rgba(153, 153, 153, 0.41)"}
+    },
+    {
+      "id": "landuse_residential",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "landuse",
+      "filter": ["all", ["==", "class", "residential"]],
+      "paint": {
+        "fill-color": "rgba(237, 237, 237, 1)",
+        "fill-outline-color": "rgba(222, 222, 222, 1)"
+      }
+    },
+    {
+      "id": "landuse_airport",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "aeroway",
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(231, 242, 254, 1)",
+        "fill-outline-color": "rgba(187, 196, 203, 1)"
+      }
+    },
+    {
+      "id": "landuse_parks",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "park",
+      "filter": [
+        "none",
+        ["==", "name", "Centro Histórico Perímetro B"],
+        ["==", "name", "Centro Histórico Perímetro A"]
+      ],
+      "paint": {"fill-color": "rgba(194, 218, 191, 1)"}
+    },
+    {
+      "id": "landuse_hospital",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "landuse",
+      "minzoom": 12,
+      "filter": ["all", ["==", "class", "hospital"]],
+      "paint": {"fill-color": "rgba(243, 215, 215, 1)"}
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "water",
+      "paint": {"fill-color": "rgba(103, 149, 211, 1)"}
+    },
+    {
+      "id": "landcover",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "landcover",
+      "minzoom": 9,
+      "maxzoom": 24,
+      "filter": ["any", ["==", "class", "grass"], ["==", "class", "wood"]],
+      "paint": {"fill-color": "rgba(182, 209, 160, 1)"}
+    },
+    {
+      "id": "transportation_streets_7_24",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "transportation",
+      "minzoom": 7,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        ["!=", "class", "ferry"],
+        ["!=", "subclass", "footway"],
+        ["!=", "subclass", "pedestrian"],
+        ["!=", "subclass", "steps"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 0.25, "line-color": "rgba(59, 59, 59, 1)"}
+    },
+    {
+      "id": "transportation_streets_6-9",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "transportation",
+      "minzoom": 5,
+      "maxzoom": 9,
+      "filter": ["all", ["!=", "class", "ferry"], ["==", "class", "motorway"]],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 1, "line-color": "rgba(113, 113, 113, 1)"}
+    },
+    {
+      "id": "transportation_footways",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "transportation",
+      "filter": [
+        "any",
+        ["==", "subclass", "footway"],
+        ["==", "subclass", "steps"],
+        ["==", "subclass", "pedestrian"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 0.25, "line-color": "rgba(177, 74, 74, 1)"}
+    },
+    {
+      "id": "boundary_minicipalities",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "boundary",
+      "minzoom": 10,
+      "filter": ["all", ["==", "admin_level", 6]],
+      "paint": {
+        "line-color": "rgba(255, 194, 128, 1)",
+        "line-width": 2,
+        "line-opacity": 0.5
+      }
+    },
+    {
+      "id": "boundary_states",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "boundary",
+      "minzoom": 4,
+      "filter": ["all", ["==", "admin_level", 4]],
+      "paint": {
+        "line-color": "rgba(255, 224, 108, 1)",
+        "line-width": 2,
+        "line-opacity": 0.7
+      }
+    },
+    {
+      "id": "boundary_countries",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "boundary",
+      "filter": ["all", ["==", "admin_level", 2], ["==", "maritime", 0]],
+      "paint": {"line-color": "rgba(107, 107, 107, 1)"}
+    },
+    {
+      "id": "metro_lines",
+      "type": "line",
+      "source": "OpenFreeMap",
+      "source-layer": "transportation",
+      "minzoom": 14,
+      "filter": ["all", ["==", "subclass", "subway"]],
+      "paint": {"line-width": 1, "line-color": "rgba(185, 46, 47, 1)"}
+    },
+    {
+      "id": "metro_points",
+      "type": "circle",
+      "source": "OpenFreeMap",
+      "source-layer": "poi",
+      "minzoom": 14,
+      "filter": ["all", ["==", "subclass", "subway"]],
+      "paint": {"circle-color": "rgba(255, 123, 0, 1)", "circle-radius": 2}
+    },
+    {
+      "id": "metro_name",
+      "type": "symbol",
+      "source": "OpenFreeMap",
+      "source-layer": "poi",
+      "minzoom": 14,
+      "filter": ["all", ["==", "subclass", "subway"]],
+      "layout": {
+        "symbol-placement": "point",
+        "text-field": "{name_int}",
+        "text-font": ["Roboto Light"],
+        "text-size": 12,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-pitch-alignment": "auto",
+        "text-keep-upright": false,
+        "text-transform": "none",
+        "text-offset": [0, -1],
+        "icon-allow-overlap": false
+      },
+      "paint": {
+        "text-halo-color": "rgba(199, 215, 230, 1)",
+        "text-halo-width": 0.5
+      }
+    },
+    {
+      "id": "building",
+      "type": "fill",
+      "source": "OpenFreeMap",
+      "source-layer": "building",
+      "minzoom": 0,
+      "filter": ["all"]
+    }
+  ],
+  "id": "4myqsy2"
+}
